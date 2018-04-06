@@ -1,15 +1,39 @@
 var express = require('express');
 var http = require('http');
-var philipsHueID = '/api/<<insert your generated username here>>/lights/';
+var philipsHueID = '/api/newdeveloper/lights/';
 
 var server = express();
 server.use('/', express.static(__dirname + '/'));
+
 server.get('/switch', function(req, res, next) {
+
+	var givenAmt = req.query.amount;
+	var hueCode = 100000;
+	
+	console.log("Validated the amount");
+	
+	if(givenAmt){
+		console.log("Inside block : Validated the amount " + givenAmt);
+		debugger;
+		if(givenAmt <= 100){
+			hueCode = 10000;
+		}
+		else if(givenAmt <= 10000){
+			hueCode = 35136;
+		}
+		else if(givenAmt <= 100000){
+			hueCode = 65136;
+		}
+	}
+	else{
+		console.log("Null Value");
+	}
+
 	var querystring = require('querystring');
-    var data = '{"on":'+req.query.toggle+'}';
+    var data = '{"on":'+req.query.toggle+', "hue" : '+hueCode+'}';
 	var options = {
-		host: '<<insert your gateway IP address here>>',
-		port: 80,
+		host: 'localhost',
+		port: 8000,
 		path: philipsHueID+req.query.id+'/state',
 		method: 'PUT',
 		headers: {
@@ -29,6 +53,6 @@ server.get('/switch', function(req, res, next) {
 	res.sendStatus(200)
 });
 
-server.listen(8686, function () {
-  console.log('Server is listening on port 8686.')
+server.listen(3000, function () {
+  console.log('Server is listening on port 3000.')
 })

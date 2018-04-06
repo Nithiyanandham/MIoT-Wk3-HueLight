@@ -1,0 +1,49 @@
+body {
+      background-color: #736c6c!important;
+}
+
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+.imagesSection{
+   width:100%;
+}
+.bodyParagraph{
+background-color: white;
+}
+.footer {
+    clear: both;
+    position: relative;
+    z-index: 5;
+    height: 20em;
+    margin-top: -8em;
+}
+.hr { 
+    display: block;
+    margin-top: 8em;
+    margin-bottom: 0.8em;
+    border-style: inset;
+    border-width: 1px;
+} 
+.fieldset {
+  padding: 1em;
+  font:80%/1 sans-serif;
+  border:#D12E0A;
+  border-width: 12px;
+  }
+.label {
+  float:left;
+  width:25%;
+  margin-right:0.5em;
+  padding-top:1.2em;
+  text-align:right;
+  font-weight:bold;
+  }
+
+.legend { 
+    display: block;
+    padding-left: 10px;
+    padding-right: 40px;
+    border: #D12E0A;
+}

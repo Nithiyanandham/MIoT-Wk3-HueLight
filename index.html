@@ -1,31 +1,44 @@
 <html>
 <header>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </header>
-
 <body>
-
-    <p>Let's control the Hue Lights!</p>
-
-
-    </br>Right light:
-    <button type="button" onclick="lightSwitch(4,true)">On</button>
-    <button type="button" onclick="lightSwitch(4,false)">Off</button>
-    </br>
-    </br>Left light:
-    <button type="button" onclick="lightSwitch(5,true)">On</button>
-    <button type="button" onclick="lightSwitch(5,false)">Off</button>
-    </br>
-
-
+	<table class="imagesSection">
+	<tr><td><img src="images/synchronyLogo.svg" width="350px" height="100px" style="margin-left: 60px"/></td>
+	<td><img src="images/2018_GPTW_email.jpg" width="350px" height="100px" style="margin-left: 500px"/></td>
+	</tr>
+	</table>
+    <hr>
+<fieldset class="fieldset">
+    <legend class="legend">Let's connect with Hue Lights!</legend>
+    <br> <label for="name" class="label">Enter Amount:</label> <input type="text" name="amount" id="amt" style="width:100px;height:35px">
+	 <input type="submit" class="btn btn-primary" align="left" value="Submit" onclick="callLight()">
+    <br><br><label for="name" class="label">Right light:</label>
+    <button type="button" class="btn btn-success" onclick="lightSwitch(1,true, 105)">Turn-On</button>
+    <button type="button" class="btn btn-danger" onclick="lightSwitch(1,false, 105)">Turn-Off</button>
+    <br><br><label for="name" class="label">Left light:</label>
+    <button type="button" class="btn btn-success" onclick="lightSwitch(2,true, 20000)">Turn-On</button>
+    <button type="button" class="btn btn-danger" onclick="lightSwitch(2,false, 20000)">Turn-Off</button>
+</fieldset>
+<footer>
+<hr class="hr">
+<table class="footer">
+	<tr><td><img src="images/synchronyLogo.svg" width="350px" height="100px" style="margin-left: 60px"/></td>
+        <td><p>©2018Synchrony|Intranet Usage Guidelines</p></td>
+</table>
+</footer>  
+  
     <script>
-        function lightSwitch(id, switchToggle) {
+        function lightSwitch(id, switchToggle, amount) {
             $.ajax({
                 type: "GET",
                 url: "/switch",
                 data: {
                     "id": id, 
-                    "toggle": switchToggle
+                    "toggle": switchToggle,
+                    "amount": amount
                 },
                 success: function(res) {
                     console.log("success");
@@ -33,6 +46,11 @@
                 contentType: "application/json",
                 dataType: 'json'
             });
+        }
+
+        function callLight(){
+            var enteredAmt = $('#amt').val();
+            lightSwitch(1,true, enteredAmt);
         }
 
     </script>
